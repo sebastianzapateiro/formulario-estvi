@@ -16,6 +16,8 @@ class CustomForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
 
+        //Se definen los campos del formulario
+
         /*
         Nombre: Campo de texto. Este campo es requerido y solo acepta caracteres
         alfanuméricos
@@ -49,6 +51,7 @@ class CustomForm extends FormBase
         $form['fecha_nacimiento'] = [
             '#type' => 'date',
             '#title' => t('Fecha de nacimiento'),
+            '#date_year_range' => '2010:+3',
             '#required' => true,
         ];
 
@@ -71,8 +74,8 @@ class CustomForm extends FormBase
         $form['actions']['submit'] = [
             '#type' => 'submit',
             '#button_type' => 'primary',
-            '#attributes' =>[
-               'class' => ['col-md-6'],
+            '#attributes' => [
+                'class' => ['col-md-6'],
             ],
             '#default_value' => t('Enviar'),
         ];
@@ -85,13 +88,17 @@ class CustomForm extends FormBase
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
 
+        /*Se valida la cantidad de caracteres, la cual desbe ser mayor a 8 para poder pasar la validación */
+
         if (strlen($form_state->getValue('identificacion')) < 8) {
             $form_state->setErrorByName('identificacion', t('El núemro' . $form_state->getValue('identificacion') . ' de identificación es demasiado corto'));
         }
         
+
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
+        //Se realiza el envio de los datos a la Base de Datos
         try {
 
             $cn = Database::getConnection();
@@ -103,6 +110,8 @@ class CustomForm extends FormBase
             $values['fecha_nacimiento'] = $value['fecha_nacimiento'];
             $values['cargo_usuario'] = $value['cargo'];
 
+            // Cambiar el valor de Estado segun el cargo seleccionado
+
             if ($value['cargo'] == 1) {
                 $values['Estado'] = 1;
             } else {
@@ -110,6 +119,8 @@ class CustomForm extends FormBase
             }
 
             $cn->insert('example_users')->fields($values)->execute();
+            
+            // Se muestra mensaje de envio de los datos
 
             \Drupal::messenger()->addMessage(t('Información envia con exito '));
 
