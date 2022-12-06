@@ -1,6 +1,6 @@
 form_module.example_module_form:
   path: '/example-module/form'
   defaults:
-    _controller: ''
+    _form: '\Drupal\form_module\Form\CustomForm'
   requirements:
-      _permission: 'access content'  
+    _permission: 'access content'  
