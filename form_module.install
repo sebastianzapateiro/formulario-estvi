@@ -18,32 +18,35 @@ function form_module_schema() {
         'type' => 'varchar',
         'length' => 200,
         'not null' => TRUE,
-        'default' => '',
+        
       ],
       'identificacion' => [
         'description' => 'Identificacion de usuario',
         'type' => 'varchar',
-        'not null' => TRUE,
+        'not null' => FALSE,
         'length' => 15,
+        
       ],
       'fecha_nacimiento' => [
         'description' => 'Fecha de nacimiento del usuario',
-        'type' => 'date',
-        'not null' => TRUE,
+        'type' => 'varchar',
+        'mysql_type' => 'date',
+        'pgsql_type' => 'date',
+        'not null' => FALSE,
       ],
     
   'cargo_usuario' =>[
     'description' => 'Cargo del usuario',
     'type' => 'int',
-    'not null' => TRUE,
+    'not null' => FALSE,
     'length' => 1,
   ],
   'Estado' =>[
     'description' => 'Estado de usuario',
     'type' => 'int',
-    'not null' => TRUE,
-    'default' => 0,
+    'not null' => FALSE,
     'length' => 1,
+    
   ],],
     'primary key' => [
       'id',
