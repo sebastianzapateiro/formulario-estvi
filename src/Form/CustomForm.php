@@ -61,6 +61,9 @@ $form['cargo'] = [
   ],
 ];
 
+
+$form['#theme'] = 'formulario_personalizado';
+
         return $form;
       }
     
