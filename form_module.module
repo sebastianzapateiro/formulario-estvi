@@ -5,12 +5,14 @@
  */
 function form_module_theme($existing, $type, $theme, $path)
 {
-  return [
-    'formulario_personalizado' => [
-        'render element' => 'form',
+    return [
+        'formulario_personalizado' => [
+            'render element' => 'form',
 
-    ]
-  ];
+        ],
+        'resultado_datos' => [
+            'variables' => ['datos' => null]
+            ,
+        ],
+    ];
 }
-
-
