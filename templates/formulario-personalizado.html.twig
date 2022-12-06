@@ -1,1 +1,15 @@
-{{form}}
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+<div class="row form-module justify-content-center gy-3 mt-5">
+	<div class="col-md-6">
+		{{ form.nombre }}
+		{{ form.identificacion }}
+	</div>
+	<div class="col-md-6">
+		{{ form.fecha_nacimiento }}
+		{{ form.cargo }}
+	</div>
+	{{ form.actions.submit }}
+</div>
