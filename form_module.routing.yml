@@ -1,0 +1,6 @@
+form_module.example_module_form:
+  path: '/example-module/form'
+  defaults:
+    _controller: ''
+  requirements:
+      _permission: 'access content'  

@@ -1,0 +1,8 @@
+name: 'Formulario custom'
+type: module
+core_version_requirement: ^8 || ^9
+
+description: 'Modulo para envio de datos'
+version: 1
+package: 'Modulo presonalizado'
+
