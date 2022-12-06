@@ -22,7 +22,7 @@ class CustomForm extends FormBase {
        '#type' => 'textfield',
        '#title' => 'Nombre',
        '#required' => TRUE,
-       '#pattern' => '^[a-zA-Z0-9_]*$'
+       '#pattern' => '^[a-zA-Z0-9_. ]+$'
 
     ];
 
@@ -33,7 +33,7 @@ class CustomForm extends FormBase {
       '#type' => 'textfield',
       '#title' => 'Identificación',
       '#required' => TRUE,
-      '#pattern' => '^[0-9]$'
+      '#pattern' => '^[0-9]*$'
 
    ];
 
@@ -60,7 +60,15 @@ $form['cargo'] = [
     '2' => t('Webmaster'),
     '3' => t('Desarrollador')
   ],
+  '#required' => TRUE,
 ];
+
+$form['actions']['#type'] = 'actions';
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#button_type' => 'primary',
+      '#default_value' => t('Enviar') ,
+    ];
 
 
 $form['#theme'] = 'formulario_personalizado';
@@ -69,10 +77,19 @@ $form['#theme'] = 'formulario_personalizado';
       }
     
 
-      public function validateForm(array &$form, FormStateInterface $form_state) {}
+      public function validateForm(array &$form, FormStateInterface $form_state) {
+
+        if (strlen($form_state->getValue('identificacion')) < 3) {
+          $form_state->setErrorByName('identificacion', t('El núemro'.$form_state->getValue('identificacion').' de identificación es demasiado corto'));
+        }
+
+      }
     
       public function submitForm(array &$form, FormStateInterface $form_state) {
-    
+        $field = $form_state->getValues();
+
+        \Drupal::messenger()->addMessage(t('Información de usuario = '.$field["nombre"]));
+
       }
 }
 
