@@ -31,7 +31,7 @@ function form_module_schema() {
         'type' => 'date',
         'not null' => TRUE,
       ],
-    ],
+    
   'cargo_usuario' =>[
     'description' => 'Cargo del usuario',
     'type' => 'int',
@@ -42,8 +42,9 @@ function form_module_schema() {
     'description' => 'Estado de usuario',
     'type' => 'int',
     'not null' => TRUE,
+    'default' => 0,
     'length' => 1,
-  ],
+  ],],
     'primary key' => [
       'id',
     ],
