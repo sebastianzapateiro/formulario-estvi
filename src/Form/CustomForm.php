@@ -23,6 +23,7 @@ class CustomForm extends FormBase
         $form['nombre'] = [
             '#type' => 'textfield',
             '#title' => 'Nombre',
+            '#placeholder' => "Ingrese su nombre",
             '#required' => true,
             '#pattern' => '^[a-zA-Z0-9_. ]+$',
 
@@ -34,6 +35,7 @@ class CustomForm extends FormBase
         $form['identificacion'] = [
             '#type' => 'textfield',
             '#title' => 'Identificación',
+            '#placeholder' => "Ingrese su número de identificación",
             '#required' => true,
             '#pattern' => '^[0-9]*$',
 
@@ -47,7 +49,6 @@ class CustomForm extends FormBase
         $form['fecha_nacimiento'] = [
             '#type' => 'date',
             '#title' => t('Fecha de nacimiento'),
-            '#description' => t('Seleccione su fecha de nacimiento'),
             '#required' => true,
         ];
 
@@ -70,6 +71,9 @@ class CustomForm extends FormBase
         $form['actions']['submit'] = [
             '#type' => 'submit',
             '#button_type' => 'primary',
+            '#attributes' =>[
+               'class' => ['col-md-6'],
+            ],
             '#default_value' => t('Enviar'),
         ];
 
@@ -81,9 +85,10 @@ class CustomForm extends FormBase
     public function validateForm(array &$form, FormStateInterface $form_state)
     {
 
-        if (strlen($form_state->getValue('identificacion')) < 3) {
+        if (strlen($form_state->getValue('identificacion')) < 8) {
             $form_state->setErrorByName('identificacion', t('El núemro' . $form_state->getValue('identificacion') . ' de identificación es demasiado corto'));
         }
+        
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
