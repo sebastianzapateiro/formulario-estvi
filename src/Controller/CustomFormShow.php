@@ -31,6 +31,7 @@ class CustomFormShow extends ControllerBase
         $query = $this->cn->select('example_users', 'users');
         $query->fields('users', ['id', 'nombre', 'identificacion', 'fecha_nacimiento', 'cargo_usuario', 'Estado']);
         $valores = $query->execute();
+        
         return[
             '#theme' =>'resultado_datos',
             '#datos' => $valores->fetchAll(),
