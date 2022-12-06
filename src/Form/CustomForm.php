@@ -4,6 +4,7 @@ namespace Drupal\form_module\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Database;
 
 
 
@@ -64,7 +65,8 @@ $form['cargo'] = [
 ];
 
 $form['actions']['#type'] = 'actions';
-    $form['actions']['submit'] = [
+    
+$form['actions']['submit'] = [
       '#type' => 'submit',
       '#button_type' => 'primary',
       '#default_value' => t('Enviar') ,
@@ -86,10 +88,35 @@ $form['#theme'] = 'formulario_personalizado';
       }
     
       public function submitForm(array &$form, FormStateInterface $form_state) {
-        $field = $form_state->getValues();
+        try{
 
-        \Drupal::messenger()->addMessage(t('Información de usuario = '.$field["nombre"]));
+        
+        $cn = Database::getConnection();
 
+       $value = $form_state->getValues();
+
+       $values['nombre'] = $value['nombre'];
+       $values['identificacion'] = $value['identificacion'];
+       $values['fecha_nacimiento'] = $value['fecha_nacimiento'];
+       $values['cargo_usuario'] = $value['cargo'];
+
+       if($value['cargo'] == 1) {
+        $values['Estado'] = 1;
+       }
+
+       else{
+        $values['Estado'] = 0;
+       }
+
+      
+       
+       $cn->insert('example_users')->fields($values)->execute();
+      
+        \Drupal::messenger()->addMessage(t('Información envia con exito '));
+
+      } catch(Exception $ex){
+        dpm($ex->getMessage());
+      }
       }
 }
 

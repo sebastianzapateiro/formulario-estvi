@@ -12,3 +12,5 @@ function form_module_theme($existing, $type, $theme, $path)
     ]
   ];
 }
+
+
