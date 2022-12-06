@@ -51,7 +51,6 @@ class CustomForm extends FormBase
         $form['fecha_nacimiento'] = [
             '#type' => 'date',
             '#title' => t('Fecha de nacimiento'),
-            '#date_year_range' => '2010:+3',
             '#required' => true,
         ];
 
@@ -90,11 +89,18 @@ class CustomForm extends FormBase
 
         /*Se valida la cantidad de caracteres, la cual desbe ser mayor a 8 para poder pasar la validación */
 
-        if (strlen($form_state->getValue('identificacion')) < 8) {
-            $form_state->setErrorByName('identificacion', t('El núemro' . $form_state->getValue('identificacion') . ' de identificación es demasiado corto'));
+        if (strlen($form_state->getValue('identificacion')) < 8 && !$form_state->hasValue('identificacion')) {
+            $form_state->setErrorByName('identificacion', t('El número' . $form_state->getValue('identificacion') . ' de identificación es demasiado corto'));
         }
-        
-
+        if (!$form_state->hasValue('nombre')) {
+            $form_state->setErrorByName('nombre', t('El campo es obligatorio'));
+        }
+        if (!$form_state->hasValue('cargo')) {
+            $form_state->setErrorByName('cargo', t('El campo es obligatorio'));
+        }
+        if (!$form_state->hasValue('fecha_nacimiento')) {
+            $form_state->setErrorByName('fecha_nacimiento', t('El campo es obligatorio'));
+        }
     }
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
@@ -119,10 +125,10 @@ class CustomForm extends FormBase
             }
 
             $cn->insert('example_users')->fields($values)->execute();
-            
+
             // Se muestra mensaje de envio de los datos
 
-            \Drupal::messenger()->addMessage(t('Información envia con exito '));
+            \Drupal::messenger()->addMessage(t('Información enviada con exito '));
 
         } catch (Exception $ex) {
             dpm($ex->getMessage());
