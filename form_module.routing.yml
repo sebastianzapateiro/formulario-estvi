@@ -5,7 +5,7 @@ form_module.example_module_form:
   requirements:
     _permission: 'access content'  
 
-curso_db.ruta_select:
+form_module.example_module_data:
   path: '/example-module/data'
   defaults:
     _controller: 'Drupal\form_module\Controller\CustomFormShow::getValues'
