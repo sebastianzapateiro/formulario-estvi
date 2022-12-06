@@ -44,7 +44,8 @@ pero debe dar un texto de ayuda al usuario
 
     $form['fecha_nacimiento'] = [
       '#type' => 'date',
-      '#title' => 'Fecha de nacimiento',
+      '#title' => t('Fecha de nacimiento'),
+      '#description' => t('Seleccione su fecha de nacimiento'),
       '#required' => TRUE,
    ];
 
@@ -53,7 +54,7 @@ Desarrollador.*/
 
 $form['cargo'] = [
   '#type' => 'select',
-  '#title' => t('Seleccione el cargo'),
+  '#title' => t('Cargo'),
   '#options' => [
     '1' => t('Administrador'),
     '2' => t('Webmaster'),
