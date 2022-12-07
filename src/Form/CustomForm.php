@@ -90,7 +90,7 @@ class CustomForm extends FormBase
         /*Se valida la cantidad de caracteres, la cual desbe ser mayor a 8 para poder pasar la validación */
 
         if (strlen($form_state->getValue('identificacion')) < 8 || !$form_state->hasValue('identificacion')) {
-            $form_state->setErrorByName('identificacion', t('El número' . $form_state->getValue('identificacion') . ' de identificación es demasiado corto'));
+            $form_state->setErrorByName('identificacion', t('El número ' . $form_state->getValue('identificacion') . ' de identificación es demasiado corto'));
         }
         if (!$form_state->hasValue('nombre')) {
             $form_state->setErrorByName('nombre', t('El campo es obligatorio'));
