@@ -136,5 +136,5 @@ Este punto lo logre hacer, sin embargo, presente problemas al validar los inputs
 
 
 
-Para validar el funcionamiento del modulo puede entrar a la dirección https://estrenar-vivienda.sebastianzapateiro.tech
+Para validar el funcionamiento del modulo puede entrar a la dirección http://estrenar-vivienda.sebastianzapateiro.tech/example-module/form y http://estrenar-vivienda.sebastianzapateiro.tech/example-module/data
 
